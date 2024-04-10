@@ -4,7 +4,9 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
-const DB_URL = 'mongodb+srv://rahulxbhardwaj:Rahul98112%40@cluster0.lnoim7o.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
+// const DB_URL = 'mongodb+srv://rahulxbhardwaj:Rahul98112%40@cluster0.lnoim7o.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
+
+const DB_URL = process.env['DB_URL'];
 
 const userSchema = new mongoose.Schema({
   name: String,
