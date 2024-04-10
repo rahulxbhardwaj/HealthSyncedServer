@@ -22,11 +22,12 @@ const User = mongoose.model('User', userSchema);
 server.use(cors());
 server.use(bodyParser.json());
 
-server.post('/demo' ,async(req,res)=> {
+
+server.post('/newUser' ,async(req,res)=> {
 
   let user = new User();
-  User.name = req.body.name;
-  User.age = req.body.age;
+  user.name = req.body.name;
+  user.age = req.body.age;
   const doc = await user.save();
   
   console.log(doc);
