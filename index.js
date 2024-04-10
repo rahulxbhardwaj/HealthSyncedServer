@@ -34,6 +34,16 @@ server.post('/newUser' ,async(req,res)=> {
   res.json(doc);
 })
 
+server.get('/alluser' , async(req,res)=>{
+   try {
+     const allUsers = await User.find(); 
+     res.json(allUsers); 
+   } catch (error) {
+     console.error('Error fetching all users:', error);
+     res.status(500).json({ error: 'Internal Server Error' });
+   }
+})
+
 
 server.listen(8080 , () => {
   console.log("Server Started !")
