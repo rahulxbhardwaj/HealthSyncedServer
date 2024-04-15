@@ -9,7 +9,7 @@ const DB_URL = process.env.DB_URL;
 
 // Mongoose Schema
 const userSchema = new mongoose.Schema({
-  name:{type :  String , index : true , unique : true },
+  name:{type :  String , index : true},
   age: Number,
   bmi: Number,
   mobile: Number,
