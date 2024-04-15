@@ -9,7 +9,7 @@ const DB_URL = process.env.DB_URL;
 
 // Mongoose Schema
 const userSchema = new mongoose.Schema({
-  name: String,
+  name:{type :  String , index : true , unique : true },
   age: Number,
   bmi: Number,
   mobile: Number,
@@ -54,6 +54,50 @@ server.get('/alluser', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
+
+server.get('/user/:id ', async (req, res) =>{
+  try {
+    const userId = req.params.id;
+    const user = await User.findById(userId);
+    console.log(user);
+    res.json(user);
+  } catch (error) {
+    console.error('Error fetching user:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+  
+})
+
+
+server.get('/users/:name', async (req, res) =>{
+  try {
+    const userName = req.params.name;
+    const user = await User.findOne({name : userName});
+    console.log(user);
+    res.json(user);
+  } catch (error) {
+    console.error('Error fetching user:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+  
+})
+
+server.delete('/delete/:id', async (req, res) => {
+  try {
+    const userId = req.params.id;
+    console.log(userId);
+    const deletedUser = await User.findByIdAndDelete(userId);
+    console.log(deletedUser);
+    res.json(deletedUser);
+  } catch (error) {
+    console.error('Error deleting user:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+
+
 
 server.listen(8080, () => {
   console.log('Server Started!');
